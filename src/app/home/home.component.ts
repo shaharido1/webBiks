@@ -99,6 +99,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           title: 'success',
           body: 'user removed',
         })
+        this.ngOnInit
       }).catch((err) => {
         this.toast.pop({
           timeout: 2000,
