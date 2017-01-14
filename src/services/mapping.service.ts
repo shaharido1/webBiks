@@ -7,7 +7,6 @@ export class MappingService {
     constructor() { }
 
     private gradesIntoArray(gradesObject): IGrade[] {
-        debugger
         let gradesArray = []
         Object.keys(gradesObject).map(ky => {
             gradesArray.push({
@@ -26,12 +25,10 @@ export class MappingService {
         gradesArray.map((grade) => {
             gradesObject[grade.index.toString()] = { date: grade.date, score: grade.score, subject: grade.subject }
         })
-        debugger
         return gradesObject
     }
 
     traineeFromServerToApp(trainee): ITrainee {
-        debugger
         return ({
             address: {
                 city: trainee.address.city,
@@ -48,7 +45,6 @@ export class MappingService {
     }
 
     traineeFromAppToServer(trainee: ITrainee) {
-        debugger
         let trainneObj = Object.assign(trainee)
         if (trainee.grades && trainee.grades.length) {
             trainneObj.grades = this.gradesIntoObject(trainee.grades)

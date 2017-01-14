@@ -49,7 +49,6 @@ export class DataService {
             }
 
     setTrainee(trainee: ITrainee): firebase.Promise <any> {
-                debugger    
                 return this.angularFire.database.object(`${Paths.trainees}/${trainee.id}`)
                             .update(this.mappingService.traineeFromAppToServer(trainee))
             }

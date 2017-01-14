@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
   }
   ngOnDestroy() {
-    debugger
     if (this.sub) {this.sub.unsubscribe()}
   }
 
@@ -86,6 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   selectTrainee(gradeId : string, i : number) {
+   //select the trainee row - change the class and hold the data for the "removeTrainee" function
     this.selectedTraineeId = gradeId
     this.selectedRow = i
 

@@ -37,9 +37,7 @@ export class CreateTraineeComponent implements OnInit, OnDestroy {
       //fetching data from server
       this.sub = this.dataService.getTraineeById(this.route.snapshot.params['id'])
         .subscribe((trainee) => {
-          debugger
           this.trainee = trainee
-          //getting one snapshot
         })
     }
     else {
@@ -64,7 +62,6 @@ export class CreateTraineeComponent implements OnInit, OnDestroy {
   }
 
   setTrainee() {
-    debugger
     //assinging the data to a new object to avoid reuse
     let traineeToSet: ITrainee = Object.assign({}, this.trainee)
     this.dataService.setTrainee(traineeToSet)
