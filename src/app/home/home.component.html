@@ -2,7 +2,6 @@
     <div class='panel-heading' style='font-size:large'> Trainees data</div>
 
 <div class='container' style="max-width: 100%;">
-
 <div class="col-xs-3" style="margin-top:20px;">
 <input class='form-control' placeholder="search" type='text' name="value" [(ngModel)]='queryText' (ngModelChange)="searchGrades()"
 />
@@ -39,6 +38,7 @@
     <pagination-controls (pageChange)="page = $event"></pagination-controls>
 </div>
 </table>
+<toaster-container></toaster-container>
 
 </div>
 </div>

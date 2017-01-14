@@ -4,7 +4,7 @@ import { ITrainee, IGradeToShow } from './../interface'
 import { DataService } from './../../services/data.service'
 import { Subscription } from 'rxjs/Subscription';
 import { TRAINEE } from './../URL'
-import { ToastsManager, } from 'ng2-toastr/ng2-toastr';
+import { ToasterService, Toast } from 'angular2-toaster';
 
 @Component({
   selector: 'app-home',
@@ -16,18 +16,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   sub: Subscription
   //defualt page for pagination 
   page: number = 1;
-  selectedRow : number
+  selectedRow: number
   trainees: Array<ITrainee>
   allGrades: Array<IGradeToShow>
   displayGrades: Array<IGradeToShow>
-  selectedTraineeId : string
+  selectedTraineeId: string
   constructor(
     public dataService: DataService,
     public router: Router,
-    public toast: ToastsManager,
-    public vRef: ViewContainerRef)
-    {
-    this.toast.setRootViewContainerRef(vRef)
+    public toast: ToasterService,
+    public vRef: ViewContainerRef) {
   }
 
   ngOnInit() {
@@ -41,11 +39,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.displayGrades = this.allGrades
     }, err => {
       console.log(err)
-      this.toast.error('error in uploading data from server')
     })
   }
   ngOnDestroy() {
-    if (this.sub) {this.sub.unsubscribe()}
+    if (this.sub) { this.sub.unsubscribe() }
   }
 
   private getGrades(trainees: Array<ITrainee>): Array<IGradeToShow> {
@@ -84,8 +81,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/' + TRAINEE)
   }
 
-  selectTrainee(gradeId : string, i : number) {
-   //select the trainee row - change the class and hold the data for the "removeTrainee" function
+  selectTrainee(gradeId: string, i: number) {
+    //select the trainee row - change the class and hold the data for the "removeTrainee" function
     this.selectedTraineeId = gradeId
     this.selectedRow = i
 
@@ -96,9 +93,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     // would require minimal change to remove the grade only
     this.dataService.removeTraineeById(this.selectedTraineeId)
       .then(() => {
-        this.toast.success('remove succesfuly')
+        this.toast.pop({
+          timeout: 2000,
+          type: "success",
+          title: 'success',
+          body: 'user removed',
+        })
       }).catch((err) => {
-        this.toast.error('error in uploading data from server')
+        this.toast.pop({
+          timeout: 2000,
+          type: "error",
+          title: 'error',
+          body: 'user could not be removed',
+        })
         console.log(err)
       })
   }

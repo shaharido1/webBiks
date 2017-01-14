@@ -12,7 +12,7 @@ import { firebaseConfig } from './firebase.config'
 //imported modules
 import {Ng2PaginationModule} from 'ng2-pagination'
 import {CustomReuseStrategy} from './reuse-strategy'
-import {ToastModule} from 'ng2-toastr/ng2-toastr'
+import {ToasterModule, ToasterService} from 'angular2-toaster';
 //components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -29,10 +29,10 @@ import {MappingService} from './../services/mapping.service'
     HomeComponent,
     AnalysisComponent,
     MonitorComponent,
-    CreateTraineeComponent
+    CreateTraineeComponent,
   ],
   imports: [
-    ToastModule,
+    ToasterModule,
     BrowserModule,
     Ng2PaginationModule,
     FormsModule,
@@ -48,7 +48,7 @@ import {MappingService} from './../services/mapping.service'
       { path: '**', redirectTo: HOME, pathMatch: 'full' }
     ])
   ],
-  providers: [DataService, MappingService, {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}],
+  providers: [DataService, MappingService, ToasterService, {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

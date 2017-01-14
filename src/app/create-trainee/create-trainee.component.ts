@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { DataService } from './../../services/data.service'
 import { ITrainee, IGrade, ISubjects } from './../interface'
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToasterService } from 'angular2-toaster';
 
 @Component({
   selector: 'app-create-trainee',
@@ -20,9 +20,8 @@ export class CreateTraineeComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     public dataService: DataService,
-    public toast: ToastsManager,
+    public toast: ToasterService,
     public vRef: ViewContainerRef) {
-    this.toast.setRootViewContainerRef(vRef)
   }
 
 
@@ -65,8 +64,21 @@ export class CreateTraineeComponent implements OnInit, OnDestroy {
     //assinging the data to a new object to avoid reuse
     let traineeToSet: ITrainee = Object.assign({}, this.trainee)
     this.dataService.setTrainee(traineeToSet)
-      .then(() => { this.toast.success('trainee updated!', 'Success') })
-      .catch((err) => { this.toast.error('could not update trainee', 'fail') })
+      .then(() => {
+        this.toast.pop({
+          timeout: 500,
+          type: "success",
+          title: 'success',
+          body: 'user updated',
+        })
+      })
+      .catch((err) => { 
+        this.toast.pop({
+          timeout: 500,
+          type: "error",
+          title: 'error',
+          body: 'user could not updated',
+        })})
   }
 
   addNew() {
@@ -78,7 +90,7 @@ export class CreateTraineeComponent implements OnInit, OnDestroy {
         score: 0,
         subject: { name: "" },
         // creating an injective key by the second.
-        // in a real case i would push it to the DB to get a real injuctive key (or use a some outer libary)
+        // in a real case i would push it to the DB to get a real injuctive key (or use some outer libary)
         index: Date.now().toString()
       })
     }, 1000)
