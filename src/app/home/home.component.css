@@ -1,0 +1,12 @@
+label {
+    margin-bottom: 0px;
+    font-weight: 400;
+    color: #555;
+}
+.thead-inverse {
+    background-color: #555555;
+    color:#fff;
+}
+.choose:active, .choose:focus {
+    background-color: 	#2F4F4F;
+} 

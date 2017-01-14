@@ -1,0 +1,26 @@
+.thead-inverse {
+    background-color: #555555;
+    color:#fff;
+    
+}
+.container.form-group {
+    max-width: 100%;
+}
+.panel-body {
+    max-width: 100%;
+}
+input, select {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 3px;
+}
+.detail {
+    margin-bottom:10px;
+}
+.btn-primary {
+    border-style: none;
+    border-radius: 5px;
+    padding: 5PX;
+    margin-right: 10px;
+    float: left;
+}

@@ -1,0 +1,45 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading' style='font-size:large'> Trainees data</div>
+
+<div class='container' style="max-width: 100%;">
+
+<div class="col-xs-3" style="margin-top:20px;">
+<input class='form-control' placeholder="search" type='text' name="value" [(ngModel)]='queryText' (ngModelChange)="searchGrades()"
+/>
+</div>
+<div class="col-xs-9" style="text-align: right; margin-top:20px;">
+<button class='btn btn-primary' (click)='createNewTrainee()'>create new</button>
+<button *ngIf="selectedTraineeId" class='btn btn-primary' (click)='removeTrainee()'>remove</button>
+</div>
+</div>
+
+<div class='panel-body'>
+    <div class='table-responsive'>
+        <table class='table table-bordered table-hover' *ngIf='displayGrades && displayGrades.length'>
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-md-2" style="font-weight: 400;">ID</th>
+<th class="col-md-2" style="font-weight: 400;">name</th>
+<th class="col-md-2" style="font-weight: 400;" >subject</th>
+<th class="col-md-2" style="font-weight: 400;">score</th>
+<th class="col-md-2" style="font-weight: 400;">date</th>
+</tr>
+</thead>
+<tbody>
+    <tr [class.active]="i==selectedRow" (click)="selectTrainee(grade.id, i)" (dblclick)="goToTraineePage(grade.id)" *ngFor='let grade of displayGrades | paginate: { itemsPerPage: 10, currentPage: page }; let i =index'>
+        <td>{{grade.id}}</td>
+        <td>{{grade.name}}</td>
+        <td>{{ grade.subject}}</td>
+        <td>{{ grade.score }}</td>
+        <td>{{ grade.date }}</td>
+    </tr>
+</tbody>
+
+<div class="has-text-centered">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</div>
+</table>
+
+</div>
+</div>
+</div>

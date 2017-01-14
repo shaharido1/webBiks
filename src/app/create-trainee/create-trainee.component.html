@@ -1,0 +1,78 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading' style='font-size:large'>Trainee data</div>
+<div class='container' style="max-width: 100%;">
+
+
+<div *ngIf="trainee" class='panel-body container'>
+  <!--traine form-->
+  <div class="container form-group">
+    <div class="col-xs-3 detail">
+      <label>name</label>
+      <input class="form-control" type="text" [(ngModel)]="trainee.name" />
+    </div>
+    <div class="col-xs-3 detail">
+      <label>ID</label>
+      <input class="form-control" type="text" [(ngModel)]="trainee.id" />
+    </div>
+    <div class="col-xs-3 detail">
+      <label>email</label>
+      <input class="form-control" type="email" [(ngModel)]="trainee.email" />
+    </div>
+    <div class="col-xs-3 detail">
+      <label>date join</label>
+      <input class="form-control" type="date" [(ngModel)]="trainee.dateJoin" />
+    </div>
+    <div class="col-xs-3 detail">
+      <label>street</label>
+      <input class="form-control col-md-4" type="text" [(ngModel)]="trainee.address.street" />
+    </div>
+    <div class="col-xs-3 detail">
+      <label>city</label>
+      <input class="form-control col-md-4" type="text" [(ngModel)]="trainee.address.city" />
+    </div>
+    <div class="col-xs-3 detail">
+      <label>country</label>
+      <input class="form-control col-md-4" type="text" [(ngModel)]="trainee.address.country" />
+    </div>
+    <div class="col-xs-3 detail">
+      <label>zip</label>
+      <input class="form-control col-md-4" type="text" [(ngModel)]="trainee.address.zip" />
+    </div>
+  </div>
+  <!--grades table-->
+
+  <div class='table-responsive'>
+    <table class='table table-bordered table-hover'>
+      <thead class="thead-inverse">
+        <tr>
+          <th class="col-md-3" style="font-weight: 400">subject</th>
+<th class="col-md-3" style="font-weight: 400">score</th>
+<th class="col-md-3" style="font-weight: 400">date</th>
+</tr>
+</thead>
+<tbody *ngIf='trainee.grades && trainee.grades.length'>
+  <tr *ngFor='let grade of trainee.grades'>
+    <td contenteditable='true'>
+      <select *ngIf="subjects && subjects.length" class='col-md-4' name="value" [(ngModel)]="grade.subject">
+                  <option *ngFor="let subject of subjects">{{subject.name}}</option>
+            </select>
+    </td>
+    <td>
+      <input contenteditable='true' name="value" [(ngModel)]="grade.score" type="number" />
+    </td>
+    <td>
+      <input contenteditable='true' name="value" [(ngModel)]="grade.date" type="date" />
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<!--submit form/add new grade button-->
+<div class="row">
+  <button class="col-md-2 btn-primary" (click)="addNew()">add new grade</button>
+  <button (click)="setTrainee()" class="btn-primary">{{updateOrSave? 'update' : 'save'}} trainee</button>
+  <button (click)="cleanForm()" class="btn-primary">clean form</button>
+</div>
+</div>
+</div>
+</div>
